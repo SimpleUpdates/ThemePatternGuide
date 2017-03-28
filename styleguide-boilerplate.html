@@ -1,0 +1,32 @@
+{% extends base_layout %}
+
+{% block theme_body %}
+	<body class="styleguide">
+	<script src="https://pym.nprapps.org/pym.v1.min.js"></script>
+
+	{% block content endblock %}
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="{{ su.theme.asset("styleguide/highlight/styles/agate.css") }}">
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="{{ su.theme.asset("styleguide/highlight/highlight.pack.js") }}"></script>
+	<script>
+		jQuery(".component").resizable({
+			resize: function (event, ui) {
+				ui.element.addClass("resized");
+			}
+		});
+
+		jQuery(".component .reset").click(function () {
+			$(this).parent().parent().removeAttr("style").removeClass("resized");
+		});
+
+		hljs.initHighlightingOnLoad();
+	</script>
+	</body>
+{% endblock %}
