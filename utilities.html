@@ -28,7 +28,7 @@
 		</div>
 		<div id="{{ iframeId }}" class="panel-body" src="admin/theme/view/dev/view.html"></div>
 		<script>
-			var {{ iframeId }} = new pym.Parent('{{ iframeId }}', 'admin/theme/view/dev/view.html', {}),
+			var parent{{ iframeId }} = new pym.Parent('{{ iframeId }}', 'admin/theme/view/dev/view.html', {}),
 				component = jQuery("[data-iframe-id='{{ iframeId }}']"),
 				output{{ iframeId }} = component.find('.output').html(),
 				iframe = component.find('iframe');
