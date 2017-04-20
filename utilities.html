@@ -13,8 +13,8 @@
 
 {% macro partialComponent( title, partial, data, withDoc ) %}
 	{% import _self as utilities %}
-	{% set output %}{% include partial with data|default({}) %}{% endset %}
-	{% set withDoc = (withDoc) ? withDoc~' ' : '' %}
+	{% set output %}{% include partial with data|default( {} ) %}{% endset %}
+	{% set withDoc = ( withDoc ) ? withDoc~' ' : '' %}
 	{{ utilities.component( title, output, "{% include '#{partial}' #{withDoc}%}") }}
 {% endmacro %}
 
@@ -28,14 +28,14 @@
 		</div>
 		<div id="{{ iframeId }}" class="panel-body" src="admin/theme/view/dev/view.html"></div>
 		<script>
-			var parent{{ iframeId }} = new pym.Parent('{{ iframeId }}', 'admin/theme/view/dev/view.html', {}),
-				component = jQuery("[data-iframe-id='{{ iframeId }}']"),
-				output{{ iframeId }} = component.find('.output').html(),
-				iframe = component.find('iframe');
+			var parent{{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
+				component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
+				output{{ iframeId }} = component.find( '.output' ).html(),
+				iframe = component.find( 'iframe' );
 
 			iframe.on('load', function () {
-				var contents = jQuery(this).contents();
-				contents.find('body').append(output{{ iframeId }});
+				var contents = jQuery( this ).contents();
+				contents.find( 'body' ).append( output{{ iframeId }} );
 			});
 		</script>
 		<div class="panel-footer"><pre><code>{{ code }}</code></pre></div>
@@ -48,12 +48,12 @@
 	<button type="button" id="{{ moreId }}">More</button>
 	<button type="button" id="{{ lessId }}">Less</button>
 	<script>
-		jQuery("#{{ moreId }}").click(function(){
-			jQuery("{{ wrapperSelector }}").append("{{ itemMarkup|escape('js') }}");
+		jQuery( "#{{ moreId }}" ).click(function(){
+			jQuery( "{{ wrapperSelector }}" ).append( "{{ itemMarkup|escape( 'js' ) }}" );
 		});
 
-		jQuery("#{{ lessId }}").click(function(){
-			jQuery("{{ itemSelector }}").last().remove();
+		jQuery( "#{{ lessId }}" ).click(function(){
+			jQuery( "{{ itemSelector }}" ).last().remove();
 		});
 	</script>
 {% endmacro %}
