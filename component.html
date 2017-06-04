@@ -1,6 +1,6 @@
 {% import _self as utilities %}
 
-{% set scenarios = scenarios|default([])|merge({"Live":{}}) %}
+{% set scenarios = scenarios|default( [] )|merge( {"Live":{}} ) %}
 {% set componentId = random() %}
 
 <div id="component-{{ componentId }}" class="component panel panel-default">
@@ -50,7 +50,7 @@
 	
 	<div class="panel-footer">
 		<pre><code>{% spaceless %}
-			{{ "{% include \"#{partial}\"" }}{{ (params) ? " with {" }}{% for p in params %}{{ "\r\n  \"#{p}\": #{p}" }}{{ (not loop.last) ? ", " : "\r\n" }}{% endfor %}{{ (params) ? "} " }}{{ "%}" }}
+			{{ "{% include \"#{partial}\"" }}{{ ( params ) ? " with {" }}{% for p in params %}{{ "\r\n  \"#{p}\": #{p}" }}{{ ( not loop.last ) ? ", " : "\r\n" }}{% endfor %}{{ ( params ) ? "} " }}{{ "%}" }}
 		{% endspaceless %}</code></pre>
 	</div>
 </div>
