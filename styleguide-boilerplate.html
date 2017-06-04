@@ -3,8 +3,23 @@
 {% block theme_body %}
 	<body class="styleguide">
 	<script src="https://pym.nprapps.org/pym.v1.min.js"></script>
-
-	{% block content endblock %}
+	
+	<div class="styleguide">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<form class="navbar-form navbar-left" role="search" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Filter" name="filter" value="{{ su.request.query.filter }}" autofocus>
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<div class="navbar-form navbar-right">
+				<a class="btn btn-default" href="{{ su.request.path }}">Refresh</a>
+				<a class="btn btn-default" href="{{ su.request.path|split( "?" )|first }}">Clear Filter</a>
+			</div>
+		</nav>
+		
+		{% block content endblock %}
+	</div>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="{{ su.theme.asset( "styleguide/highlight/styles/agate.css" ) }}">

@@ -1,59 +1,13 @@
-{% macro styleguideTitle( title, filePrefix ) %}
-	<h2 class="component-category-heading">{{ title }}</h2>
-	{% if filePrefix %}
-		<div class="alert alert-info" role="alert">
-			File locations:
-			<ul>
-				<li>Templates: `partial/{{ filePrefix }}-patternName.html`</li>
-				<li>Stylesheets: `style/{{ filePrefix }}-patternName.less`</li>
-			</ul>
-		</div>
-	{% endif %}
-{% endmacro %}
-
-{% macro partialComponent( title, partial, data, withDoc ) %}
+{% macro renderComponents( components ) %}
 	{% import _self as utilities %}
-	{% set output %}{% include partial with data|default( {} ) %}{% endset %}
-	{% set withDoc = ( withDoc ) ? withDoc~' ' : '' %}
-	{{ utilities.component( title, output, "{% include '#{partial}' #{withDoc}%}") }}
-{% endmacro %}
-
-{% macro component( title, output, code ) %}
-	{% set iframeId = "iframe#{random()}" %}
-	<div class="component panel panel-default" data-iframe-id="{{ iframeId }}">
-		<div class="output" style="display:none;">{{ output }}</div>
-		<div class="panel-heading">
-			<button class="reset">Reset</button>
-			<h3 class="panel-title">{{ title }}</h3>
-		</div>
-		<div id="{{ iframeId }}" class="panel-body" src="admin/theme/view/dev/view.html"></div>
-		<script>
-			var parent{{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
-				component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
-				output{{ iframeId }} = component.find( '.output' ).html(),
-				iframe = component.find( 'iframe' );
-
-			iframe.on('load', function () {
-				var contents = jQuery( this ).contents();
-				contents.find( 'body' ).append( output{{ iframeId }} );
-			});
-		</script>
-		<div class="panel-footer"><pre><code>{{ code }}</code></pre></div>
-	</div>
-{% endmacro %}
-
-{% macro makeAddRemoveButtons( wrapperSelector, itemSelector, itemMarkup ) %}
-	{% set moreId = "more" ~ random() %}
-	{% set lessId = "less" ~ random() %}
-	<button type="button" id="{{ moreId }}">More</button>
-	<button type="button" id="{{ lessId }}">Less</button>
-	<script>
-		jQuery( "#{{ moreId }}" ).click(function(){
-			jQuery( "{{ wrapperSelector }}" ).append( "{{ itemMarkup|escape( 'js' ) }}" );
-		});
-
-		jQuery( "#{{ lessId }}" ).click(function(){
-			jQuery( "{{ itemSelector }}" ).last().remove();
-		});
-	</script>
+	
+	{% for component in components %}
+		{% if not su.request.query.filter or su.request.query.filter|lower in component.partial|lower %}
+			{% include "dev/component.html" with {
+			partial: component.partial,
+			scenarios: component.data,
+			params: component.params
+			} %}
+		{% endif %}
+	{% endfor %}
 {% endmacro %}
