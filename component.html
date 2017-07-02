@@ -1,7 +1,9 @@
-{% import _self as utilities %}
+{# accepts: partial, scenarios, params #}
 
 {% set scenarios = scenarios|default( [] )|merge( {"Live":{}} ) %}
 {% set componentId = random() %}
+
+{% if not su.request.query.filter or su.request.query.filter|lower in partial|lower %}
 
 <div id="component-{{ componentId }}" class="component panel panel-default">
 	<div class="panel-heading">
@@ -54,3 +56,5 @@
 		{% endspaceless %}</code></pre>
 	</div>
 </div>
+
+{% endif %}
