@@ -37,7 +37,6 @@
 				ui.element.addClass("resized");
 			},
 			start: function (event, ui) {
-				console.log('saving you');
 				$('<div class="ui-resizable-iframeFix"></div>')
 					.css({
 						width: "100vw", height: "100vh",
@@ -47,10 +46,7 @@
 					.appendTo("body");
 			},
 			stop: function (event, ui) {
-				console.log('getting out of the way');
-				$("div.ui-resizable-iframeFix").each(function () {
-					this.parentNode.removeChild(this);
-				});
+				$("div.ui-resizable-iframeFix").remove();
 			}
 		});
 
