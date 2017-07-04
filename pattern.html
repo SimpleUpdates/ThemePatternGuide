@@ -1,0 +1,34 @@
+{# accepts: name, scenarios block, usage block #}
+
+{% set componentId = "component_#{random()}" %}
+
+{% if not su.request.query.filter or su.request.query.filter|lower in name|lower %}
+
+<div id="{{ componentId }}" class="component panel panel-default">
+	<div class="panel-heading">
+		{% set basePath = su.request.path|split( "?" )|first %}
+		
+		<button class="reset">Reset</button>
+		<h3 class="panel-title"><a href="{{ basePath }}?filter={{ name|url_encode }}">{{ name }}</a></h3>
+		<ul class="nav nav-pills" role="tablist"></ul>
+	</div>
+	
+	<div class="panel-body">
+		<div class="tab-content">
+			{% block scenarios %}{% endblock %}
+		</div>
+	</div>
+	
+	{% if block( "usage" ) %}
+	<div class="panel-footer">
+		<pre><code>{% block usage %}{% endblock %}</code></pre>
+	</div>
+	{% endif %}
+	
+	<script>
+		jQuery("#{{ componentId }} .tab-pane").first().addClass("active");
+		jQuery("#{{ componentId }} .nav-pills li").first().addClass("active");
+	</script>
+</div>
+
+{% endif %}

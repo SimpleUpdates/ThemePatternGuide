@@ -1,0 +1,27 @@
+{% set scenarioId = "scenario_#{random()}" %}
+{% set iframeId = "iframe_#{random()}" %}
+
+<div role="tabpanel" class="tab-pane component-iframe" id="{{ scenarioId }}" data-iframe-id="{{ iframeId }}">
+	<div class="output" style="display:none;">
+		{% block scenario %}{% endblock %}
+	</div>
+	
+	<div class="iframe" id="{{ iframeId }}" src="admin/theme/view/dev/view.html"></div>
+	
+	<script>
+		var {{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
+			component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
+			output{{ iframeId }} = component.find( '.output' ).html(),
+			iframe = component.find( 'iframe' ),
+			tabs = jQuery( "#{{ componentId }} .nav-pills" );
+		
+		jQuery(tabs).append(
+			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
+		);
+			
+		iframe.on('load', function () {
+			var contents = jQuery( this ).contents();
+			contents.find( 'body' ).append( output{{ iframeId }} );
+		});
+	</script>
+</div>

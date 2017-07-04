@@ -1,0 +1,25 @@
+{# accepts partial, scenarios, params #}
+
+{% embed "dev/pattern.html" with {
+	name: partial
+} %}
+	{% block scenarios %}
+		{% for name, scenario in scenarios %}
+			{% embed "dev/scenario.html" with { name: name } %}
+				{% block scenario  %}
+					{% include partial with scenario %}
+				{% endblock %}
+			{% endembed %}
+		{% endfor %}
+		
+		{% embed "dev/scenario.html" with { name: "Live" } %}
+			{% block scenario  %}
+				{% include partial %}
+			{% endblock %}
+		{% endembed %}
+	{% endblock %}
+	
+	{% block usage %}{% spaceless %}
+		{{ "{% include \"#{name}\"" }}{{ ( params ) ? " with {" }}{% for p in params %}{{ "\r\n  \"#{p}\": #{p}" }}{{ ( not loop.last ) ? ", " : "\r\n" }}{% endfor %}{{ ( params ) ? "} " }}{{ "%}" }}
+	{% endspaceless %}{% endblock %}
+{% endembed %}
