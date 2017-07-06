@@ -32,26 +32,26 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="{{ su.theme.asset( "styleguide/highlight/highlight.pack.js" ) }}"></script>
 	<script>
-		jQuery(".component").resizable({
-			resize: function (event, ui) {
-				ui.element.addClass("resized");
+		jQuery( ".component" ).resizable({
+			resize: function ( event, ui ) {
+				ui.element.addClass( "resized" );
 			},
-			start: function (event, ui) {
-				$('<div class="ui-resizable-iframeFix"></div>')
+			start: function ( event, ui ) {
+				$( '<div class="ui-resizable-iframe-fix"></div>' )
 					.css({
 						width: "100vw", height: "100vh",
 						position: "absolute", zIndex: 1000
 					})
-					.css($(this).offset())
-					.appendTo("body");
+					.css( $( this ).offset() )
+					.appendTo( "body" );
 			},
-			stop: function (event, ui) {
-				$("div.ui-resizable-iframeFix").remove();
+			stop: function ( event, ui ) {
+				$( "div.ui-resizable-iframe-fix" ).remove();
 			}
 		});
 
-		jQuery(".component .reset").click(function () {
-			$(this).parent().parent().removeAttr("style").removeClass("resized");
+		jQuery( ".component .reset" ).click(function () {
+			$( this ).parent().parent().removeAttr( "style" ).removeClass( "resized" );
 		});
 
 		hljs.initHighlightingOnLoad();
