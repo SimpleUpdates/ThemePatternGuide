@@ -1,0 +1,57 @@
+{% embed "dev/pattern.html" with { name: "Colors" } %}
+	{% block scenarios %}
+		{% embed "dev/scenario.html" %}
+			{% block scenario %}
+				<div class="colors">
+					{% for i in 0..20 %}<i></i>{% endfor %}
+				</div>
+			{% endblock %}
+		{% endembed %}
+	{% endblock %}
+	{% block usage %}{{ '.registerColors( colorVar1, colorVar2, colorVar3, ~"red", ... );'|e }}{% endblock %}
+{% endembed %}
+	
+{% embed "dev/pattern.html" with { name: "Atom: Blockquote" } %}
+	{% block scenarios %}
+		{% embed "dev/scenario.html" %}
+			{% block scenario %}
+				<div class="block" data-type="quote" data-quote-quote="This is a very profound thing I said."
+						data-quote-cite="Mr. Wise">
+					<blockquote>
+						<p>This is a very profound thing I said.</p>
+						<footer><cite>Mr. Wise</cite></footer>
+					</blockquote>
+				</div>
+			{% endblock %}
+		{% endembed %}
+	{% endblock %}
+{% endembed %}
+
+{% embed "dev/pattern.html" with { name: "Atom: Button" } %}
+	{% block scenarios %}
+		{% embed "dev/scenario.html" %}
+			{% block scenario %}
+				<br />
+				<p><span class="button"><a href="#">.button > a</a></span></p>
+				<p><a href="#"><span class="button">a > .button</span></a></p>
+				<p><a href="#" class="button">a.button</a></p>
+				<p><button class="button">button.button</button></p>
+				<p><span class="button">.button:not(a)</span></p>
+				<p><span class="button bleached"><a target="_blank" href="#">Bleached Button</a></span></p>
+			{% endblock %}
+		{% endembed %}
+	{% endblock %}
+	{% block usage %}{{ '<a href="#" class="button">Label</a>'|e }}{% endblock %}
+{% endembed %}
+
+{% embed "dev/pattern.html" with { name: "Atom: Hard Rule" } %}
+	{% block scenarios %}
+		{% embed "dev/scenario.html" %}
+			{% block scenario %}
+				Content before hard rule.
+				<hr>
+				Content after hard rule.
+			{% endblock %}
+		{% endembed %}
+	{% endblock %}
+{% endembed %}
