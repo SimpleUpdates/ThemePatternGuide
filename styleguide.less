@@ -1,5 +1,5 @@
 // ............................................................
-// .for
+// for
 
 .for( @i, @n ) {.-each( @i )}
 .for( @n )     when ( isnumber( @n ) ) {.for( 1, @n )}
@@ -8,7 +8,7 @@
 }
 
 // ............................................................
-// .for-each
+// for-each
 
 .for( @array )   when ( default() ) {.for-impl_( length( @array ) )}
 .for-impl_( @i ) when ( @i > 1 )    {.for-impl_( ( @i - 1 ) )}
