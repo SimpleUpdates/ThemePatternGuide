@@ -2,9 +2,9 @@
 	{% block scenarios %}
 		{% embed "dev/scenario.html" %}
 			{% block scenario %}
-				<div class="colors">
+				<ul class="colors">
 					{% for i in 0..20 %}<i></i>{% endfor %}
-				</div>
+				</ul>
 			{% endblock %}
 		{% endembed %}
 	{% endblock %}

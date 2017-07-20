@@ -2,8 +2,14 @@
 {% set iframeId = "iframe_#{random()}" %}
 
 <div role="tabpanel" class="tab-pane component-iframe" id="{{ scenarioId }}" data-iframe-id="{{ iframeId }}">
+	<div class="outputHead" style="display:none;">
+		{% block scenarioHead %}{% endblock %}
+	</div>
+	
 	<div class="output" style="display:none;">
-		{% block scenario %}{% endblock %}
+		<div class="{% block wrapperClasses %}{% endblock %}">
+			{% block scenario %}{% endblock %}
+		</div>
 	</div>
 	
 	<div class="iframe" id="{{ iframeId }}" src="admin/theme/view/dev/view.html"></div>
@@ -11,6 +17,7 @@
 	<script>
 		var {{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
 			component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
+			outputHead{{ iframeId }} = component.find( '.outputHead' ).html(),
 			output{{ iframeId }} = component.find( '.output' ).html(),
 			iframe = component.find( 'iframe' ),
 			tabs = jQuery( "#{{ componentId }} .nav-pills" );
@@ -21,7 +28,8 @@
 			
 		iframe.on('load', function () {
 			var contents = jQuery( this ).contents();
-			contents.find( 'body' ).append( output{{ iframeId }} );
+			contents.find( 'head' ).append( outputHead{{ iframeId }} );
+			contents.find( 'body' ).prepend( output{{ iframeId }} );
 		});
 	</script>
 </div>
