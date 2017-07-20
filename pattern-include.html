@@ -8,7 +8,7 @@
 			{% embed "dev/scenario.html" with { name: name } %}
 				{% block wrapperClasses %}{{ wrapperClasses }}{% endblock %}
 				{% block scenario  %}
-					{% include partial with scenario %}
+					{% include partial with scenario only %}
 				{% endblock %}
 			{% endembed %}
 		{% endfor %}
@@ -16,7 +16,7 @@
 		{% embed "dev/scenario.html" with { name: "Live" } %}
 			{% block wrapperClasses %}{{ wrapperClasses }}{% endblock %}
 			{% block scenario  %}
-				{% include partial %}
+				{% include partial only %}
 			{% endblock %}
 		{% endembed %}
 	{% endblock %}
