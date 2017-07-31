@@ -2,7 +2,7 @@
 {% set iframeId = "iframe_#{random()}" %}
 
 <div role="tabpanel" class="tab-pane component-iframe" id="{{ scenarioId }}" data-iframe-id="{{ iframeId }}">
-	<div class="outputHead" style="display:none;">
+	<div class="output-head" style="display:none;">
 		{% block scenarioHead %}{% endblock %}
 	</div>
 	
@@ -17,7 +17,7 @@
 	<script>
 		var {{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
 			component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
-			outputHead{{ iframeId }} = component.find( '.outputHead' ).html(),
+			outputHead{{ iframeId }} = component.find( '.output-head' ).html(),
 			output{{ iframeId }} = component.find( '.output' ).html(),
 			iframe = component.find( 'iframe' ),
 			tabs = jQuery( "#{{ componentId }} .nav-pills" );
