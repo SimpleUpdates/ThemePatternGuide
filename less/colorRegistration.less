@@ -1,4 +1,4 @@
-.registerColors( @colors... ) {
+.registerColors( @colors ) {
 	// === for ===
 	.for( @i, @n ) {.-each( @i )}
 	.for( @n )     when ( isnumber( @n ) ) {.for( 1, @n )}
@@ -15,15 +15,19 @@
 
 	.colors {
 		.for( @colors ); .-each( @name ) {
-		i:nth-child( @{i} ) {
-			background-color: @@name;
-			display: inline-flex;
-			&:before {
-				content: "@@{name} @{@{name}}";
+			i:nth-child( @{i} ) {
+				background-color: @@name;
+				display: inline-flex !important;
+				&:before {
+					content: "@@{name} @{@{name}}";
+				}
 			}
 		}
 	}
-	}
+}
+
+& when ( length(@registeredColors) > 0 ) {
+	.registerColors( @registeredColors )
 }
 
 &.styleguide-view {
