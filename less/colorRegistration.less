@@ -26,7 +26,8 @@
 	}
 }
 
-& when ( length(@registeredColors) > 0 ) {
+@registeredColors: false;
+& when not ( @registeredColors = false ) {
 	.registerColors( @registeredColors )
 }
 
