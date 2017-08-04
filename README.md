@@ -17,7 +17,7 @@ Register all your global color variables:
 
 ```Less
 /* ~"color" explanation: https://github.com/less/less.js/issues/1595 */
-.registerColors(
+@registeredColors:
   accentColor,
   accentColorBleached,
   accentColorLight,
@@ -28,8 +28,7 @@ Register all your global color variables:
   accentColorDark,
   ~"white",
   ~"lightGray",
-  ~"black"
-);
+  ~"black";
 ```
 
 Create `layout/styleguide.html`:
