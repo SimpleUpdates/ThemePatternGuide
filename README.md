@@ -10,7 +10,7 @@ git submodule add git@github.com:SimpleUpdates/ThemePatternGuide.git dev/
 Add the following line to `global.less`:
 
 ```Less
-@import "../dev/styleguide";
+@import (optional) "../dev/styleguide";
 ```
 
 Register all your global color variables:
