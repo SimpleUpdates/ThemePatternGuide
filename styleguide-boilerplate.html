@@ -2,7 +2,6 @@
 
 {% block theme_body %}
 	<body class="styleguide su_bootstrap_safe">
-	<script src="https://pym.nprapps.org/pym.v1.min.js"></script>
 	
 	<div class="styleguide">
 		<nav class="navbar navbar-default navbar-fixed-top">
@@ -34,6 +33,23 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="{{ su.theme.asset( "../dev/highlight/highlight.pack.js" ) }}"></script>
 	<script>
+
+		function resizeIframe( iframe ) {
+			$( iframe ).height( $( iframe ).contents().find("body").height() );
+		}
+		
+		function resizeComponentIframes( component ) {
+			$(component).find( "iframe" ).each( function() {
+				resizeIframe( this );
+			} );
+		}
+
+		function resizeAllIframes() {
+			$( "iframe" ).each( function() {
+				resizeIframe( this );
+			} );
+		}
+		
 		jQuery( ".component" ).resizable({
 			resize: function ( event, ui ) {
 				ui.element.addClass( "resized" );
@@ -53,10 +69,26 @@
 		});
 
 		jQuery( ".component .reset" ).click(function () {
-			$( this ).parent().parent().removeAttr( "style" ).removeClass( "resized" );
+			var component = $( this ).parent().parent();
+			component.removeAttr( "style" ).removeClass( "resized" );
 		});
 
 		hljs.initHighlightingOnLoad();
+		
+		jQuery( "iframe" ).on("load", function() {
+			resizeIframe(this);
+		});
+		
+		jQuery( ".nav-pills a" ).on("click", function() {
+			var component = $( this ).closest(".component");
+			setTimeout( function() {
+				resizeComponentIframes( component );
+			}, 300 );
+		});
+
+		$( window ).resize(function() {
+			resizeAllIframes();
+		});
 	</script>
 	</body>
 {% endblock %}

@@ -1,10 +1,12 @@
 {% extends base_layout %}
 
+{% block theme_head %}
+	{{ parent() }}
+	{{ su.request.query.head|raw }}
+{% endblock %}
+
 {% block theme_body %}
 	<body class="su_bootstrap_safe styleguide-view">
-		<script src="https://pym.nprapps.org/pym.v1.min.js"></script>
-		<script>
-			var pymChild = new pym.Child( { polling: 500 } );
-		</script>
+	{{ su.request.query.body|raw }}
 	</body>
 {% endblock %}

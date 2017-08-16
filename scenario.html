@@ -12,24 +12,31 @@
 		</div>
 	</div>
 	
-	<div class="iframe" id="{{ iframeId }}" src="admin/theme/view/dev/view.html"></div>
+	<iframe name="{{ iframeId }}" id="{{ iframeId }}"></iframe>
 	
 	<script>
-		var {{ iframeId }} = new pym.Parent( '{{ iframeId }}', 'admin/theme/view/dev/view.html', {} ),
-			component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
-			outputHead{{ iframeId }} = component.find( '.output-head' ).html(),
-			output{{ iframeId }} = component.find( '.output' ).html(),
-			iframe = component.find( 'iframe' ),
+		var iframe = jQuery('#{{ iframeId }}'),
 			tabs = jQuery( "#{{ componentId }} .nav-pills" );
 		
 		jQuery( tabs ).append(
 			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
 		);
+
+		function postToIframe(data,url,target){
+			jQuery('body').append('<form action="'+url+'" method="post" target="'+target+'" id="postToIframe"></form>');
+			jQuery.each(data,function(n,v){
+				var input = jQuery('<input type="" name="'+n+'" />').attr('value',v)
+				jQuery('#postToIframe').append(input);
+			});
+			jQuery('#postToIframe').submit().remove();
+		}
 		
-		iframe.on('load', function () {
-			var contents = jQuery( this ).contents();
-			contents.find( 'head' ).append( outputHead{{ iframeId }} );
-			contents.find( 'body' ).prepend( output{{ iframeId }} );
+		jQuery(document).ready(function() {
+			var component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
+				head = component.find( '.output-head' ).html(),
+				body = component.find( '.output' ).html();
+				
+			postToIframe( {head:head,body:body}, 'admin/theme/view/dev/view.html?myid={{ iframeId }}', '{{ iframeId }}' );
 		});
 	</script>
 </div>
