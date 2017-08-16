@@ -69,7 +69,7 @@
 		});
 
 		jQuery( ".component .reset" ).click(function () {
-			var component = $( this ).parent().parent();
+			var component = $( this ).closest(".component");
 			component.removeAttr( "style" ).removeClass( "resized" );
 		});
 
