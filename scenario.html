@@ -6,7 +6,7 @@
 		{% block scenarioHead %}{% endblock %}
 	</div>
 	
-	<div class="output" style="display:none;">
+	<div class="output disable-logo-js" style="display:none;">
 		<div class="{% block wrapperClasses %}{% endblock %}">
 			{% block scenario %}{% endblock %}
 		</div>
@@ -25,7 +25,7 @@
 		jQuery( tabs ).append(
 			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
 		);
-			
+		
 		iframe.on('load', function () {
 			var contents = jQuery( this ).contents();
 			contents.find( 'head' ).append( outputHead{{ iframeId }} );
