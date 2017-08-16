@@ -25,7 +25,7 @@
 		function postToIframe(data,url,target){
 			jQuery('body').append('<form action="'+url+'" method="post" target="'+target+'" id="postToIframe"></form>');
 			jQuery.each(data,function(n,v){
-				var input = jQuery('<input type="" name="'+n+'" />').attr('value',v)
+				var input = jQuery('<input type="hidden" name="'+n+'" />').attr('value',v)
 				jQuery('#postToIframe').append(input);
 			});
 			jQuery('#postToIframe').submit().remove();
