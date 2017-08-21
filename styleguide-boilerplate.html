@@ -1,5 +1,11 @@
 {% extends base_layout %}
 
+{% block theme_head %}
+	{{ parent() }}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{{ su.theme.less('../dev/styleguide-backend.less') }}
+{% endblock %}
+
 {% block theme_body %}
 	<body class="styleguide su_bootstrap_safe">
 	
@@ -7,10 +13,10 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<form class="navbar-form navbar-left" role="search" method="GET">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Filter" name="filter"
+					<input class="form-control" placeholder="Filter" name="filter"
 							value="{{ su.request.query.filter }}" autofocus>
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button class="btn btn-default">Submit</button>
 			</form>
 			<div class="navbar-form navbar-right">
 				<a class="btn btn-default" href="{{ su.request.path }}">Refresh</a>
@@ -45,7 +51,7 @@
 		}
 
 		function resizeAllIframes() {
-			$( "iframe" ).each( function() {
+			$( ".component iframe" ).each( function() {
 				resizeIframe( this );
 			} );
 		}

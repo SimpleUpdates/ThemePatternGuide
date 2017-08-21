@@ -1,7 +1,72 @@
-.styleguide {
+.styleguide-view {
+	height: auto;
 	background: white;
-	padding: 1rem;
 }
 
-@import "less/colorRegistration";
-@import "less/component";
+.registerColors( @colors ) {
+	// === for ===
+	.for( @i, @n ) {.-each( @i )}
+	.for( @n )     when ( isnumber( @n ) ) {.for( 1, @n )}
+	.for( @i, @n ) when not ( @i = @n )  {
+		.for( ( @i + ( @n - @i ) / abs( @n - @i ) ), @n );
+	}
+	// === end for ===
+
+	// === for-each ===
+	.for( @array )   when ( default() ) {.for-impl_( length( @array ) )}
+	.for-impl_( @i ) when ( @i > 1 )    {.for-impl_( ( @i - 1 ) )}
+	.for-impl_( @i ) when ( @i > 0 )    {.-each( extract( @array, @i ) )}
+	// === end for-each ===
+
+	.colors {
+		.for( @colors ); .-each( @name ) {
+		i:nth-child( @{i} ) {
+			background-color: @@name;
+			display: inline-flex !important;
+			&:before {
+				content: "@@{name} @{@{name}}";
+			}
+		}
+	}
+	}
+}
+
+@registeredColors: false;
+& when not ( @registeredColors = false ) {
+	.registerColors( @registeredColors )
+}
+
+&.styleguide-view {
+	.colors {
+		i {
+			display: none;
+			padding: .5rem;
+			margin: .5rem;
+			width: 5rem;
+			height: 5rem;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			vertical-align: top;
+			&:before {
+				display: block;
+				opacity: 0;
+				z-index: 100;
+				color: black;
+				background-color: white;
+				border-radius: 4px;
+				white-space: pre-wrap;
+				padding: .5em;
+				text-align: center;
+				transition: opacity 400ms;
+				box-shadow: 0 0 5px rgba( 0,0,0,.2 );
+			}
+			&:hover:before {
+				opacity: 1;
+			}
+		}
+	}
+	img {
+		max-width: 100%;
+	}
+}
