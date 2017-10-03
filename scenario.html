@@ -15,23 +15,23 @@
 	<iframe name="{{ iframeId }}" id="{{ iframeId }}"></iframe>
 	
 	<script>
-		var iframe = jQuery('#{{ iframeId }}'),
+		var iframe = jQuery( '#{{ iframeId }}' ),
 			tabs = jQuery( "#{{ componentId }} .nav-pills" );
 		
 		jQuery( tabs ).append(
 			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
 		);
 
-		function postToIframe(data,url,target){
-			jQuery('body').append('<form action="'+url+'" method="post" target="'+target+'" id="postToIframe"></form>');
-			jQuery.each(data,function(n,v){
-				var input = jQuery('<input type="hidden" name="'+n+'" />').attr('value',v)
-				jQuery('#postToIframe').append(input);
+		function postToIframe( data, url, target ){
+			jQuery( 'body' ).append( '<form action="'+url+'" method="post" target="'+target+'" id="postToIframe"></form>' );
+			jQuery.each( data, function( n, v ) {
+				var input = jQuery( '<input type="hidden" name="'+n+'" />' ).attr( 'value', v );
+				jQuery( '#postToIframe' ).append( input );
 			});
-			jQuery('#postToIframe').submit().remove();
+			jQuery( '#postToIframe' ).submit().remove();
 		}
 		
-		jQuery(document).ready(function() {
+		jQuery( document ).ready(function() {
 			var component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
 				head = component.find( '.output-head' ).html(),
 				body = component.find( '.output' ).html();

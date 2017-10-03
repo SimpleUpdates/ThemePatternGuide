@@ -3,7 +3,7 @@
 {% block theme_head %}
 	{{ parent() }}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	{{ su.theme.less('../dev/styleguide-backend.less') }}
+	{{ su.theme.less( '../dev/styleguide-backend.less' ) }}
 {% endblock %}
 
 {% block theme_body %}
@@ -41,11 +41,11 @@
 	<script>
 
 		function resizeIframe( iframe ) {
-			$( iframe ).height( $( iframe ).contents().find("body").height() );
+			$( iframe ).height( $( iframe ).contents().find( "body" ).height() );
 		}
 		
 		function resizeComponentIframes( component ) {
-			$(component).find( "iframe" ).each( function() {
+			$( component ).find( "iframe" ).each( function() {
 				resizeIframe( this );
 			} );
 		}
@@ -56,7 +56,7 @@
 			} );
 		}
 		
-		jQuery( ".component" ).resizable({
+		jQuery( ".component" ).resizable( {
 			resize: function ( event, ui ) {
 				ui.element.addClass( "resized" );
 			},
@@ -75,24 +75,24 @@
 		});
 
 		jQuery( ".component .reset" ).click(function () {
-			var component = $( this ).closest(".component");
+			var component = $( this ).closest( ".component" );
 			component.removeAttr( "style" ).removeClass( "resized" );
 		});
 
 		hljs.initHighlightingOnLoad();
 		
-		jQuery( "iframe" ).on("load", function() {
-			resizeIframe(this);
+		jQuery( "iframe" ).on( "load", function() {
+			resizeIframe( this );
 		});
 		
 		jQuery( ".nav-pills a" ).on("click", function() {
-			var component = $( this ).closest(".component");
+			var component = $( this ).closest( ".component" );
 			setTimeout( function() {
 				resizeComponentIframes( component );
 			}, 300 );
 		});
 
-		$( window ).resize(function() {
+		$( window ).resize( function() {
 			resizeAllIframes();
 		});
 	</script>

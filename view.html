@@ -3,7 +3,6 @@
 {% block theme_head %}
 	{{ parent() }}
 	{{ su.request.query.head|raw }}
-	{{ su.theme.js('../dev/tota11y.min.js') }}
 {% endblock %}
 
 {% block theme_body %}
