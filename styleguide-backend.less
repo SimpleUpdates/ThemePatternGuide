@@ -1,4 +1,5 @@
 .styleguide {
+	min-height: 100vh;
 	background: white;
 	pre code {
 		border-radius: 4px;
@@ -52,7 +53,10 @@
 		> .panel-body {
 			padding: 0;
 		}
-		&.resized {
+		&:only-child {
+			height: calc( ~"100vh - 91px" );
+		}
+		&.resized, &:only-child {
 			display: flex;
 			flex-direction: column;
 			> .panel-heading, > .panel-footer {
