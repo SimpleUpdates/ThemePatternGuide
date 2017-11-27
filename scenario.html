@@ -36,7 +36,7 @@
 				head = component.find( '.output-head' ).html(),
 				body = component.find( '.output' ).html();
 				
-			postToIframe( {head:head,body:body}, 'admin/theme/view/dev/view.html?myid={{ iframeId }}', '{{ iframeId }}' );
+			postToIframe( {head:head,body:body}, '/admin/theme/view/dev/view.html?myid={{ iframeId }}', '{{ iframeId }}' );
 		});
 	</script>
 </div>
