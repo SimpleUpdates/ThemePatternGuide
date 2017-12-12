@@ -15,8 +15,7 @@
 	<iframe name="{{ iframeId }}" id="{{ iframeId }}"></iframe>
 	
 	<script>
-		var iframe = jQuery( '#{{ iframeId }}' ),
-			tabs = jQuery( "#{{ componentId }} .nav-pills" );
+		var tabs = jQuery( "#{{ componentId }} .nav-pills" );
 		
 		jQuery( tabs ).append(
 			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'

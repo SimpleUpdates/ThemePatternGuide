@@ -1,27 +1,25 @@
 {# accepts partial, scenarios, params #}
 
 {% embed "dev/pattern.html" with {
-	name: partial
+	name: partial,
+	isRefreshable: true
 } %}
 	{% block scenarios %}
 		{% for name, scenario in scenarios %}
-			{% embed "dev/scenario.html" with { name: name } %}
-				{% block wrapperClasses %}{{ wrapperClasses }}{% endblock %}
-				{% block scenario  %}
-					{% include partial ignore missing with scenario only %}
-				{% endblock %}
-			{% endembed %}
+			{% include "dev/scenario-include.html" with {
+				name: name,
+				partial: partial,
+				scenario: scenario
+			} %}
 		{% endfor %}
 		
-		{% embed "dev/scenario.html" with { name: "Live" } %}
-			{% block wrapperClasses %}{{ wrapperClasses }}{% endblock %}
-			{% block scenario  %}
-				{% include partial ignore missing only %}
-			{% endblock %}
-		{% endembed %}
+		{% include "dev/scenario-include.html" with {
+			name: "Unconfigured",
+			partial: partial
+		} %}
 	{% endblock %}
 	
 	{% block usage %}{% spaceless %}
-		{{ "{% include \"#{name}\"" }}{{ ( params ) ? " with {" }}{% for p in params %}{{ "\r\n  \"#{p}\": #{p}" }}{{ ( not loop.last ) ? ", " : "\r\n" }}{% endfor %}{{ ( params ) ? "} " }}{{ "%}" }}
+		{{ "{% include \"#{name}\"" }}{{ ( params ) ? " with {" }}{% for p in params %}{{ "\r\n  \"#{p}\": #{p}" }}{{ ( not loop.last ) ? ", " : "\r\n" }}{% endfor %}{{ ( params ) ? "} " }}{{ " %}" }}
 	{% endspaceless %}{% endblock %}
 {% endembed %}
