@@ -2,25 +2,25 @@
 {% set iframeId = "iframe_#{random()}" %}
 
 <div role="tabpanel" class="tab-pane component-iframe" id="{{ scenarioId }}" data-iframe-id="{{ iframeId }}">
-  <div class="output-head" style="display:none;">
-	  {% block scenarioHead %}{% endblock %}
-  </div>
-  
-  {% set path = "/admin/theme/view/dev/view.html?includePath=#{partial|json_encode|e('url')}" %}
-  
-  {% for key, value in scenario %}
-      {% set key = key|e("url") %}
-      {% set value = value|json_encode|e("url") %}
-      {% set path = path ~ "&" ~ key ~ "=" ~ value %}
-  {% endfor %}
-  
-  <iframe name="{{ iframeId }}" id="{{ iframeId }}" src="{{ path }}"></iframe>
-  
-  <script>
-	  var tabs = jQuery( "#{{ componentId }} .nav-pills" );
-   
-	  jQuery( tabs ).append(
-		  '<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
-	  );
-  </script>
+	<div class="output-head" style="display:none;">
+		{% block scenarioHead %}{% endblock %}
+	</div>
+	
+	{% set path = "/admin/theme/view/dev/view.html?includePath=#{partial|json_encode|e( 'url' )}" %}
+	
+	{% for key, value in scenario %}
+		{% set key = key|e( "url" ) %}
+		{% set value = value|json_encode|e( "url" ) %}
+		{% set path = path ~ "&" ~ key ~ "=" ~ value %}
+	{% endfor %}
+	
+	<iframe name="{{ iframeId }}" id="{{ iframeId }}" src="{{ path }}"></iframe>
+	
+	<script>
+		var tabs = jQuery( "#{{ componentId }} .nav-pills" );
+		
+		jQuery( tabs ).append(
+			'<li role="presentation"><a href="#{{ scenarioId }}" role="tab" data-toggle="tab">{{ name }}</a></li>'
+		);
+	</script>
 </div>

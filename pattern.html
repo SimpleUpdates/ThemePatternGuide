@@ -11,7 +11,7 @@
 				<ul class="nav nav-pills" role="tablist"></ul>
 			</div>
 			
-			<ul class="bgColors">
+			<ul class="background-colors">
 				<li><a href="#" style="background-color:white;" class="active"></a></li>
 				<li><a href="#" style="background-color:grey;"></a></li>
 				<li><a href="#" style="background-color:black;"></a></li>
@@ -36,7 +36,7 @@
 		
 		<script>
 			var updateBackgroundColor = function( component ) {
-				var color = component.find( ".bgColors .active" ).css( "background-color" );
+				var color = component.find( ".background-colors .active" ).css( "background-color" );
 				component.find( 'iframe' ).each(function() {
 					jQuery( this ).contents().find( "html, body" ).css( "background-color", color );
 				});
@@ -45,15 +45,14 @@
 			jQuery( "#{{ componentId }} .tab-pane" ).first().addClass( "active" );
 			jQuery( "#{{ componentId }} .nav-pills li" ).first().addClass( "active" );
 			jQuery( "#{{ componentId }} .refresh" ).click(function() {
-				console.log('refreshing...');
-				jQuery('#{{ componentId }} iframe').each(function() {
+				jQuery( '#{{ componentId }} iframe' ).each(function() {
 					jQuery( this ).closest( ".component-iframe" ).addClass( "loading" );
-					this.contentWindow.location.reload(true);
+					this.contentWindow.location.reload( true );
 				});
 			});
-			jQuery( "#{{ componentId }} .bgColors a" ).click(function(e) {
+			jQuery( "#{{ componentId }} .background-colors a" ).click( function( e ) {
 				e.preventDefault();
-				jQuery( "#{{ componentId }} .bgColors a" ).removeClass( "active" );
+				jQuery( "#{{ componentId }} .background-colors a" ).removeClass( "active" );
 				jQuery( this ).addClass( "active" );
 				updateBackgroundColor( jQuery( "#{{ componentId }}" ) );
 			});
