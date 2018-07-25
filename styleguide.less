@@ -2,6 +2,12 @@
 	height: auto;
 	min-height: 0;
 	background: white;
+	overflow: hidden;
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
 }
 
 .registerColors( @colors ) {
@@ -21,14 +27,14 @@
 
 	.colors {
 		.for( @colors ); .-each( @name ) {
-		i:nth-child( @{i} ) {
-			background-color: @@name;
-			display: inline-flex !important;
-			&:before {
-				content: "@@{name} @{@{name}}";
+			i:nth-child( @{i} ) {
+				background-color: @@name;
+				display: inline-flex !important;
+				&:before {
+					content: "@@{name} @{@{name}}";
+				}
 			}
 		}
-	}
 	}
 }
 

@@ -4,13 +4,13 @@
 
 ```bash
 cd /path/to/theme/
-git submodule add git@github.com:SimpleUpdates/ThemePatternGuide.git dev/
+git submodule add git@github.com:SimpleUpdates/ThemePatternGuide.git module/ThemePatternGuide/
 ```
 
 Add the following line to `global.less`:
 
 ```Less
-@import (optional) "../dev/styleguide";
+@import (optional) "../module/ThemePatternGuide/styleguide";
 ```
 
 Register all your global color variables:
@@ -36,23 +36,44 @@ Create `layout/styleguide.html`:
 ```Twig
 {# Access this page at /admin/theme/view/layout/styleguide.html #}
 
-{% extends "dev/styleguide-boilerplate.html" %}
+{% set base = "module/ThemePatternGuide/styleguide-boilerplate.html" %}
+{% extends base %}
+{% import base as guide %}
 
 {% block content %}
-  {% embed "dev/pattern.html" with { name: "Colors" } %}
+  {% embed "#{styleguideThemePath}/pattern.html" with { name: "Example" } %}
     {% block scenarios %}
       {% embed "dev/scenario.html" %}
         {% block scenario %}
-          <div class="colors">
-            {% for i in 0..20 %}<i></i>{% endfor %}
-          </div>
+          <p>First Scenario HTML</p>
+        {% endblock %}
+      {% endembed %}
+      {% embed "dev/scenario.html" %}
+        {% block scenario %}
+          <p>Second Scenario HTML</p>
         {% endblock %}
       {% endembed %}
     {% endblock %}
   {% endembed %}
 	
   {# Update to match the path of one of your patterns: #}
-  {% include "dev/pattern-include.html" with { partial: "partial/atom-logo.html" } %}
+  {{ guide.patternInclude({ partial: "partial/atom-logo.html" }) }}
+  
+  {# More complex usage #}
+  {{ guide.patternInclude({
+    partial: "partial/molecule-hero.html",
+    scenarios: {
+      "Configured": {
+        "pageTitle": "Page Title",
+        "image": "https://unsplash.it/750/250"
+      },
+      "No Image": {
+        "pageTitle": "Page Title",
+        "image": null
+      }
+    },
+    params: [ "pageTitle", "image" ]
+  }) }}
 {% endblock %}
 ```
 

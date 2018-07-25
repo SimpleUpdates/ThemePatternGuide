@@ -33,9 +33,10 @@
 		jQuery( document ).ready(function() {
 			var component = jQuery( "[data-iframe-id='{{ iframeId }}']" ),
 				head = component.find( '.output-head' ).html(),
-				body = component.find( '.output' ).html();
+				body = component.find( '.output' ).html(),
+				iframeSrc = '/admin/theme/view/{{ styleguideThemePath }}/view.html?myid={{ iframeId }}';
 				
-			postToIframe( {head:head,body:body}, '/admin/theme/view/dev/view.html?myid={{ iframeId }}', '{{ iframeId }}' );
+			postToIframe( {head:head,body:body}, iframeSrc, '{{ iframeId }}' );
 		});
 	</script>
 </div>

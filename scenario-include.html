@@ -6,7 +6,7 @@
 		{% block scenarioHead %}{% endblock %}
 	</div>
 	
-	{% set path = "/admin/theme/view/dev/view.html?includePath=#{partial|json_encode|e( 'url' )}" %}
+	{% set path = "/admin/theme/view/#{styleguideThemePath}/view.html?includePath=#{partial|json_encode|e( 'url' )}" %}
 	
 	{% for key, value in scenario %}
 		{% set key = key|e( "url" ) %}

@@ -1,9 +1,9 @@
-{% embed "dev/pattern.html" with { name: "Colors" } %}
+{% embed "#{styleguideThemePath}/pattern.html" with { name: "Colors" } %}
 	{% block scenarios %}
-		{% embed "dev/scenario.html" %}
+		{% embed "#{styleguideThemePath}/scenario.html" %}
 			{% block scenario %}
 				<ul class="colors">
-					{% for i in 0..20 %}<i></i>{% endfor %}
+					{% for i in 0..50 %}<i></i>{% endfor %}
 				</ul>
 			{% endblock %}
 		{% endembed %}
@@ -11,9 +11,9 @@
 	{% block usage %}{{ '.registerColors( colorVar1, colorVar2, colorVar3, ~"red", ... );'|e }}{% endblock %}
 {% endembed %}
 	
-{% embed "dev/pattern.html" with { name: "Atom: Blockquote" } %}
+{% embed "#{styleguideThemePath}/pattern.html" with { name: "Atom: Blockquote" } %}
 	{% block scenarios %}
-		{% embed "dev/scenario.html" %}
+		{% embed "#{styleguideThemePath}/scenario.html" %}
 			{% block scenario %}
 				<div class="block" data-type="quote" data-quote-quote="This is a very profound thing I said."
 						data-quote-cite="Mr. Wise">
@@ -27,9 +27,9 @@
 	{% endblock %}
 {% endembed %}
 
-{% embed "dev/pattern.html" with { name: "Atom: Button" } %}
+{% embed "#{styleguideThemePath}/pattern.html" with { name: "Atom: Button" } %}
 	{% block scenarios %}
-		{% embed "dev/scenario.html" %}
+		{% embed "#{styleguideThemePath}/scenario.html" %}
 			{% block scenario %}
 				<br />
 				<p><span class="button"><a href="#">.button > a</a></span></p>
@@ -44,9 +44,9 @@
 	{% block usage %}{{ '<a href="#" class="button">Label</a>'|e }}{% endblock %}
 {% endembed %}
 
-{% embed "dev/pattern.html" with { name: "Atom: Hard Rule" } %}
+{% embed "#{styleguideThemePath}/pattern.html" with { name: "Atom: Hard Rule" } %}
 	{% block scenarios %}
-		{% embed "dev/scenario.html" %}
+		{% embed "#{styleguideThemePath}/scenario.html" %}
 			{% block scenario %}
 				Content before hard rule.
 				<hr>

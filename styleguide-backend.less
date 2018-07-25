@@ -89,23 +89,17 @@
 			display: flex;
 			flex-direction: column;
 			> .panel-body {
-				flex: 1;
+				flex: 1 1 auto;
 				overflow: scroll;
 				padding: 0;
-				position: relative;
-				.tab-content {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-				}
+				display: flex;
+				.tab-content,
 				.tab-pane,
 				.component-iframe,
 				.iframe,
 				iframe {
-					min-height: 100%;
-					height: 100%;
+					display: flex;
+					flex: 1 0 100%;
 				}
 			}
 		}
@@ -126,7 +120,7 @@
 	.loading:after {
 		@color: white;
 		@size: 40px;
-
+		
 		content: '';
 		box-sizing: border-box;
 		position: absolute;

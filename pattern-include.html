@@ -1,19 +1,19 @@
 {# accepts partial, scenarios, params #}
 
-{% embed "dev/pattern.html" with {
+{% embed "#{styleguideThemePath}/pattern.html" with {
 	name: partial,
 	isRefreshable: true
 } %}
 	{% block scenarios %}
 		{% for name, scenario in scenarios %}
-			{% include "dev/scenario-include.html" with {
+			{% include "#{styleguideThemePath}/scenario-include.html" with {
 				name: name,
 				partial: partial,
 				scenario: scenario
 			} %}
 		{% endfor %}
 		
-		{% include "dev/scenario-include.html" with {
+		{% include "#{styleguideThemePath}/scenario-include.html" with {
 			name: "Unconfigured",
 			partial: partial
 		} %}
