@@ -1,6 +1,6 @@
 {% set styleguideThemePath = "module/ThemePatternGuide" %}
 
-{% macro patternInclude(paramsObject) %}
+{% macro patternInclude( paramsObject ) %}
 	{% set styleguideThemePath = "module/ThemePatternGuide" %}
 	{% include "#{styleguideThemePath}/pattern-include.html" with paramsObject %}
 {% endmacro %}
@@ -48,7 +48,7 @@
 	<script>
 		function resizeIframe( iframe ) {
 			var height = $( iframe ).contents().find( "body" ).height()
-			$( iframe ).css("min-height", height);
+			$( iframe ).css( "min-height", height );
 		}
 		
 		function resizeComponentIframes( component ) {
